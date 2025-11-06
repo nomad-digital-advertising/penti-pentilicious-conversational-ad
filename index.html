@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
-        var clickTag = "{CLICK_URL}https://648y.tr.adj.st/robo?adj_t=1lt1w1hh&adj_campaign=robo";
-        var eventUrl = "{EVENT_URL}";
+        var clickTag = "{CLICK_URL}https://648y.tr.adj.st/robo?adj_t=1lt1w1hh&adj_campaign=robo"; 
+        var eventUrl = "{EVENT_URL}"; 
     </script>
 
     <style>
@@ -35,7 +35,7 @@
             border: 1px solid #e2e8f0;
         }
         .chat-header {
-            background-color: #fa5273;
+            background-color: #fa5273; 
             color: #ffffff;
             padding: 1rem;
             text-align: center;
@@ -48,7 +48,7 @@
             justify-content: center;
             gap: 0.5rem;
             height: 70px;
-            cursor: pointer;
+            cursor: pointer; 
             position: relative;
             z-index: 1;
         }
@@ -64,10 +64,10 @@
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
-            position: relative;
+            position: relative; 
         }
         .message-bubble {
-            max-width: 225px;
+            max-width: 225px; 
             padding: 0.6rem 0.8rem;
             border-radius: 0.8rem;
             word-wrap: break-word;
@@ -75,12 +75,12 @@
             font-size: 0.9rem;
         }
         .bot-message {
-            background-color: #ffe4e6;
-            color: #fa5273;
+            background-color: #ffe4e6; 
+            color: #fa5273; 
             align-self: flex-start;
         }
         .user-message {
-            background-color: #fce7f6;
+            background-color: #fce7f6; 
             color: #1e293b;
             align-self: flex-end;
         }
@@ -89,13 +89,14 @@
             align-self: flex-start;
             margin-bottom: 0.25rem;
             cursor: pointer;
-            width: 220px;
-            min-width: 200px;
-            max-width: 225px;
+            width: 220px; 
+            min-width: 200px; 
+            max-width: 225px; 
             border-radius: 0.5rem;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            display: block;
-            border-radius: 0.5rem
+            display: block; 
+            border-radiuse: 0.5rem
+
         }
 
         .image-link-container:hover {
@@ -104,13 +105,14 @@
         }
 
         .image-link-container img {
-             display: block;
-             width: 100%;
+             display: block; 
+             width: 100%; 
              height: auto;
-             border-radius: 0.5rem
+             border-radiuse: 0.5rem
         }
 
         .user-choice-button {
+            background-color: #fa5273;
             color: #ffffff;
             padding: 0.7rem 1.2rem;
             border-radius: 0.5rem;
@@ -121,27 +123,18 @@
             text-align: left;
             font-size: 0.85rem;
             box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
-            align-self: flex-end;
+            align-self: flex-end; 
             width: fit-content;
             max-width: 90%;
             margin-bottom: 0.25rem;
         }
-        
-        .initial-choice-button {
-             background-color: #fa5273;
-        }
-
-        .post-action-button {
-            min-width: 150px;
-        }
-        
         .user-choice-button:hover {
-            background-color: #e04263;
+            background-color: #e04263; 
             transform: translateY(-1px);
             box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 1.5px 3px -1px rgba(0, 0, 0, 0.07);
         }
         .user-choice-button:active {
-            background-color: #c93b5a;
+            background-color: #c93b5a; 
             transform: translateY(0);
         }
 
@@ -157,9 +150,9 @@
             width: 298px;
             background-color: #f8f8f8;
         }
-
+        
         .restart-button {
-            background-color: #fa5273;
+            background-color: #fa5273; 
             color: #ffffff;
             padding: 0.6rem 1rem;
             border-radius: 0.4rem;
@@ -172,13 +165,13 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .restart-button:hover {
-            background-color: #e04263;
+            background-color: #e04263; 
         }
         .restart-button:active {
-            background-color: #c93b5a;
+            background-color: #c93b5a; 
             transform: translateY(0);
         }
-
+        
         .loading-indicator {
             color: #64748b;
             display: flex;
@@ -247,51 +240,51 @@
 
         .instruction-message {
             position: absolute;
-            bottom: 170px;
-            left: 130px;
+            bottom: 170px; 
+            left: 130px; 
             transform: translateX(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            z-index: 9999;
-            pointer-events: none;
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
+            z-index: 9999; 
+            pointer-events: none; 
         }
 
         .instruction-message.show {
-            opacity: 1;
+            opacity: 1; 
         }
 
         @keyframes cursor-movement-and-click {
             0% {
                 transform: translate(0, 0) scale(1);
-                filter: brightness(100%);
+                filter: brightness(100%); 
             }
-            40% {
+            40% { 
                 transform: translate(25px, -25px) scale(1);
-                filter: brightness(100%);
+                filter: brightness(100%); 
             }
-            45% {
-                transform: translate(25px, -25px) scale(1.1);
-                filter: brightness(200%);
+            45% { 
+                transform: translate(25px, -25px) scale(1.1); 
+                filter: brightness(200%); 
             }
-            50% {
+            50% { 
                 transform: translate(25px, -25px) scale(1);
-                filter: brightness(100%);
+                filter: brightness(100%); 
             }
             100% {
                 transform: translate(0, 0) scale(1);
-                filter: brightness(100%);
+                filter: brightness(100%); 
             }
         }
 
         .cursor-indicator {
-            width: 60px;
-            height: 60px;
-            animation: cursor-movement-and-click 2.5s infinite ease-in-out;
-            transform-origin: bottom center;
-            object-fit: contain;
+            width: 60px; 
+            height: 60px; 
+            animation: cursor-movement-and-click 2.5s infinite ease-in-out; 
+            transform-origin: bottom center; 
+            object-fit: contain; 
         }
     </style>
 </head>
@@ -315,32 +308,32 @@
 
     <script>
         const PENTI_MAIN_URL = "https://www.penti.com/tr";
-        const TYPING_DELAY = 1200;
+        const TYPING_DELAY = 1200; 
         
-        let hasUserInteracted = false;
+        let hasUserInteracted = false; 
         
         const ALL_CHOICES = [
-            {
-                text: "Cesur ve Fark Yaratan Desenler",
-                action: "image_link",
-                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Desen.jpg",
-                url: "https://www.penti.com/tr/c/pentilicious-desenli",
+            { 
+                text: "Cesur ve Fark Yaratan Desenler", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Desen.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-desenli", 
                 event: "bold_style_click",
                 id: "bold"
             },
-            {
-                text: "Şık ve Klasik Dokunuşlar",
-                action: "image_link",
-                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Klasik.jpg",
-                url: "https://www.penti.com/tr/c/pentilicious-siyah",
+            { 
+                text: "Şık ve Klasik Dokunuşlar", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Klasik.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-siyah", 
                 event: "classic_style_click",
-                id: "classic"
+                id: "classic" 
             },
-            {
-                text: "Canlı Renkler ve Eğlenceli Detaylar",
-                action: "image_link",
-                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Renkli.jpg",
-                url: "https://www.penti.com/tr/c/pentilicious-renkli",
+            { 
+                text: "Canlı Renkler ve Eğlenceli Detaylar", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Renkli.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-renkli", 
                 event: "fun_details_click",
                 id: "fun"
             }
@@ -351,7 +344,7 @@
                 messages: [
                     { type: 'text', content: "Külotlu çorapla tarzını en iyi nasıl ifade edersin?" }
                 ],
-                choices: ALL_CHOICES
+                choices: ALL_CHOICES 
             }
         };
 
@@ -360,15 +353,15 @@
         const restartButton = document.getElementById('restartButton');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const chatHeader = document.getElementById('chatHeader');
-        const instructionMessage = document.getElementById('instructionMessage');
-        const cursorImage = document.getElementById('cursorImage');
-        let countdownMessageDiv = null;
+        const instructionMessage = document.getElementById('instructionMessage'); 
+        const cursorImage = document.getElementById('cursorImage'); 
+        let countdownMessageDiv = null; 
 
         function trackEvent(eventName) {
             if (eventUrl && eventName) {
                 var track = new Image();
                 track.src = eventUrl + eventName;
-                console.log("Tracking event:", track.src);
+                console.log("Tracking event:", track.src); 
             } else {
                 console.warn("Etkinlik izleme URL'si veya etkinlik adı eksik.");
             }
@@ -399,7 +392,7 @@
 
         function showInstructionMessage() {
             if (hasUserInteracted) {
-                return;
+                return; 
             }
             
             if (chatMessages.querySelector('.user-choice-button')) {
@@ -411,21 +404,17 @@
             instructionMessage.classList.remove('show');
         }
         
-        function displayNextChoices(excludedId) {
-            const currentChoiceButtons = chatMessages.querySelectorAll('.user-choice-button');
-            currentChoiceButtons.forEach(btn => btn.remove());
-
+        function followUpChoices(excludedId) {
             const remainingChoices = ALL_CHOICES.filter(choice => choice.id !== excludedId);
             
             showTypingIndicator();
             setTimeout(() => {
                 hideTypingIndicator();
-                
-                addMessage("Ürünleri keşfetmeye devam et... ✨", 'bot'); 
+                addMessage("Ya da keşfetmeye devam et... ✨", 'bot');
                 
                 remainingChoices.forEach(choice => {
                     const button = document.createElement('button');
-                    button.classList.add('user-choice-button', 'initial-choice-button');
+                    button.classList.add('user-choice-button');
                     button.textContent = choice.text;
 
                     button.addEventListener('click', () => {
@@ -444,7 +433,7 @@
         
         function handleChoiceClick(choice) {
             hasUserInteracted = true;
-            hideInstructionMessage();
+            hideInstructionMessage(); 
             
             if (choice.event) {
                 trackEvent(choice.event);
@@ -469,7 +458,7 @@
                     const link = document.createElement('a');
                     link.href = choice.url;
                     link.target = '_blank';
-                    link.classList.add('image-link-container');
+                    link.classList.add('image-link-container'); 
                     
                     const img = document.createElement('img');
                     img.src = choice.imageUrl;
@@ -484,33 +473,22 @@
                             addMessage("Ürünleri incelemek için sayfayı ziyaret et! 👇", 'bot');
 
                             const inspectButton = document.createElement('button');
-                            inspectButton.classList.add('user-choice-button', 'initial-choice-button', 'post-action-button'); 
+                            inspectButton.classList.add('user-choice-button');
                             inspectButton.textContent = "Ürünleri İncele!";
+                            inspectButton.style.backgroundColor = '#fa5273'; 
+                            inspectButton.style.color = '#ffffff';
 
                             inspectButton.addEventListener('click', () => {
-                                trackEvent("product_inspect_click_" + choice.id);
-                                window.open(choice.url, '_blank');
+                                trackEvent("product_inspect_click_" + choice.id); 
+                                window.open(choice.url, '_blank'); 
                             });
                             chatMessages.appendChild(inspectButton);
                             
-                            const continueButton = document.createElement('button');
-                            continueButton.classList.add('user-choice-button', 'initial-choice-button', 'post-action-button');
-                            continueButton.textContent = "Keşfetmeye Devam Et...";
-                            
-                            continueButton.addEventListener('click', () => {
-                                trackEvent("continue_exploring_click_" + choice.id);
-                                
-                                inspectButton.remove();
-                                continueButton.remove();
-                                
-                                displayNextChoices(choice.id); 
-                            });
-                            chatMessages.appendChild(continueButton);
-
-                            restartButton.classList.remove('hidden');
                             chatMessages.scrollTop = chatMessages.scrollHeight;
                             
-                        }, TYPING_DELAY);
+                            followUpChoices(choice.id); 
+                            
+                        }, TYPING_DELAY); 
                     };
 
 
@@ -518,14 +496,14 @@
                     img.onerror = () => {
                          console.error("Görsel yüklenemedi:", choice.imageUrl);
                          img.src = "https://placehold.co/200x150/fa5273/ffffff?text=Görsel+Yok";
-                         afterImageLoaded();
+                         afterImageLoaded(); 
                     };
                     
                     link.appendChild(img);
                     chatMessages.appendChild(link);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    chatMessages.scrollTop = chatMessages.scrollHeight; 
                     
-                }, TYPING_DELAY);
+                }, TYPING_DELAY); 
 
             }
         }
@@ -535,16 +513,16 @@
             const currentNode = decisionTree[currentPath];
             if (!currentNode || !currentNode.choices || currentNode.choices.length === 0) {
                 restartButton.classList.remove('hidden');
-                hideInstructionMessage();
+                hideInstructionMessage(); 
                 return;
             }
 
             hideTypingIndicator();
-            restartButton.classList.add('hidden');
+            restartButton.classList.add('hidden'); 
 
             currentNode.choices.forEach(choice => {
                 const button = document.createElement('button');
-                button.classList.add('user-choice-button', 'initial-choice-button');
+                button.classList.add('user-choice-button');
                 button.textContent = choice.text;
 
                 button.addEventListener('click', () => {
@@ -553,14 +531,14 @@
                 chatMessages.appendChild(button);
             });
             
-            showInstructionMessage();
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            showInstructionMessage(); 
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
         }
 
         function displayMessagesSequentially(messages, index) {
             if (index >= messages.length) {
                 hideTypingIndicator();
-                setTimeout(renderChoices, TYPING_DELAY / 2);
+                setTimeout(renderChoices, TYPING_DELAY / 2); 
                 return;
             }
 
@@ -583,26 +561,26 @@
                 return;
             }
             
-            restartButton.classList.add('hidden');
+            restartButton.classList.add('hidden'); 
 
             displayMessagesSequentially(currentNode.messages, 0);
         }
 
         restartButton.addEventListener('click', () => {
-            trackEvent("restart_button_click");
-            chatMessages.innerHTML = '';
-            currentPath = 'start';
-            countdownMessageDiv = null;
+            trackEvent("restart_button_click"); 
+            chatMessages.innerHTML = ''; 
+            currentPath = 'start'; 
+            countdownMessageDiv = null; 
             
-            hasUserInteracted = false;
+            hasUserInteracted = false; 
             
-            renderStep();
-            restartButton.classList.add('hidden');
+            renderStep(); 
+            restartButton.classList.add('hidden'); 
         });
 
         chatHeader.addEventListener('click', () => {
-            trackEvent("logo_click");
-            window.open(PENTI_MAIN_URL, '_blank');
+            trackEvent("logo_click"); 
+            window.open(PENTI_MAIN_URL, '_blank'); 
         });
 
         document.addEventListener('DOMContentLoaded', () => {
