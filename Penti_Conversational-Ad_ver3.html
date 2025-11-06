@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="ad.size" content="width=300, height=600">
+    <title>Penti Sohbet Kampanyası</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        var clickTag = "{CLICK_URL}https://648y.tr.adj.st/robo?adj_t=1lt1w1hh&adj_campaign=robo"; 
+        var eventUrl = "{EVENT_URL}"; 
+    </script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 600px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chat-header {
+            background-color: #fa5273; 
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            height: 70px;
+            cursor: pointer; 
+            position: relative;
+            z-index: 1;
+        }
+        .chat-header img {
+            max-height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            position: relative; 
+        }
+        .message-bubble {
+            max-width: 225px; 
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.8rem;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        .bot-message {
+            background-color: #ffe4e6; 
+            color: #fa5273; 
+            align-self: flex-start;
+        }
+        .user-message {
+            background-color: #fce7f6; 
+            color: #1e293b;
+            align-self: flex-end;
+        }
+
+        .image-link-container {
+            align-self: flex-start;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            width: 220px; 
+            min-width: 200px; 
+            max-width: 225px; 
+            border-radius: 0.5rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: block; 
+            border-radiuse: 0.5rem
+
+        }
+
+        .image-link-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .image-link-container img {
+             display: block; 
+             width: 100%; 
+             height: auto;
+             border-radiuse: 0.5rem
+        }
+
+        .user-choice-button {
+            background-color: #fa5273;
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: none;
+            text-align: left;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+            align-self: flex-end; 
+            width: fit-content;
+            max-width: 90%;
+            margin-bottom: 0.25rem;
+        }
+        .user-choice-button:hover {
+            background-color: #e04263; 
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 1.5px 3px -1px rgba(0, 0, 0, 0.07);
+        }
+        .user-choice-button:active {
+            background-color: #c93b5a; 
+            transform: translateY(0);
+        }
+
+        .restart-button-container {
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            position: relative;
+            width: 298px;
+            background-color: #f8f8f8;
+        }
+        
+        .restart-button {
+            background-color: #fa5273; 
+            color: #ffffff;
+            padding: 0.6rem 1rem;
+            border-radius: 0.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 0.85rem;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .restart-button:hover {
+            background-color: #e04263; 
+        }
+        .restart-button:active {
+            background-color: #c93b5a; 
+            transform: translateY(0);
+        }
+        
+        .loading-indicator {
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 5% ;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .loading-indicator span {
+            animation-name: blink;
+            animation-duration: 1.4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+            font-size: 3.5rem;
+            line-height: 1;
+            margin: 0 4px;
+        }
+
+        .loading-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-messages:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(100, 116, 139, 0.3);
+        }
+        .chat-messages::-webkit-scrollbar-thumb:active {
+            background-color: rgba(100, 116, 139, 0.5);
+        }
+
+        .chat-messages {
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+        }
+        .chat-messages:hover {
+            scrollbar-color: rgba(100, 116, 139, 0.3) transparent;
+        }
+
+        .instruction-message {
+            position: absolute;
+            bottom: 170px; 
+            left: 130px; 
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
+            z-index: 9999; 
+            pointer-events: none; 
+        }
+
+        .instruction-message.show {
+            opacity: 1; 
+        }
+
+        @keyframes cursor-movement-and-click {
+            0% {
+                transform: translate(0, 0) scale(1);
+                filter: brightness(100%); 
+            }
+            40% { 
+                transform: translate(25px, -25px) scale(1);
+                filter: brightness(100%); 
+            }
+            45% { 
+                transform: translate(25px, -25px) scale(1.1); 
+                filter: brightness(200%); 
+            }
+            50% { 
+                transform: translate(25px, -25px) scale(1);
+                filter: brightness(100%); 
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+                filter: brightness(100%); 
+            }
+        }
+
+        .cursor-indicator {
+            width: 60px; 
+            height: 60px; 
+            animation: cursor-movement-and-click 2.5s infinite ease-in-out; 
+            transform-origin: bottom center; 
+            object-fit: contain; 
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header" id="chatHeader">
+            <img src="https://nomad-digital.squarespace.com/s/Penti_Logo.svg" alt="Penti Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/fa5273/ffffff?text=Penti';" />
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div id="instructionMessage" class="instruction-message">
+                <img id="cursorImage" src="https://nomad-digital.squarespace.com/s/Robo-Danisman_Click-Hand.png" alt="Tıklama Eli" class="cursor-indicator" onerror="this.onerror=null;this.src='https://placehold.co/50x50/fa5273/ffffff?text=X';" />
+            </div>
+        </div>
+        <div class="restart-button-container">
+            <div id="loadingIndicator" class="loading-indicator hidden">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+            <button id="restartButton" class="restart-button hidden">Sohbeti Yeniden Başlat</button>
+        </div>
+    </div>
+
+    <script>
+        const PENTI_MAIN_URL = "https://www.penti.com/tr";
+        const TYPING_DELAY = 1200; 
+        
+        let hasUserInteracted = false; 
+        
+        const ALL_CHOICES = [
+            { 
+                text: "Cesur ve Fark Yaratan Desenler", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Desen.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-desenli", 
+                event: "bold_style_click",
+                id: "bold"
+            },
+            { 
+                text: "Şık ve Klasik Dokunuşlar", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Klasik.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-siyah", 
+                event: "classic_style_click",
+                id: "classic" 
+            },
+            { 
+                text: "Canlı Renkler ve Eğlenceli Detaylar", 
+                action: "image_link", 
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Renkli.jpg", 
+                url: "https://www.penti.com/tr/c/pentilicious-renkli", 
+                event: "fun_details_click",
+                id: "fun"
+            }
+        ];
+
+        const decisionTree = {
+            start: {
+                messages: [
+                    { type: 'text', content: "Külotlu çorapla tarzını en iyi nasıl ifade edersin?" }
+                ],
+                choices: ALL_CHOICES 
+            }
+        };
+
+        let currentPath = 'start';
+        const chatMessages = document.getElementById('chatMessages');
+        const restartButton = document.getElementById('restartButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const chatHeader = document.getElementById('chatHeader');
+        const instructionMessage = document.getElementById('instructionMessage'); 
+        const cursorImage = document.getElementById('cursorImage'); 
+        let countdownMessageDiv = null; 
+
+        function trackEvent(eventName) {
+            if (eventUrl && eventName) {
+                var track = new Image();
+                track.src = eventUrl + eventName;
+                console.log("Tracking event:", track.src); 
+            } else {
+                console.warn("Etkinlik izleme URL'si veya etkinlik adı eksik.");
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message-bubble');
+            if (sender === 'user') {
+                messageDiv.classList.add('user-message');
+            } else {
+                messageDiv.classList.add('bot-message');
+            }
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return messageDiv;
+        }
+
+        function showTypingIndicator() {
+            restartButton.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+        }
+
+        function hideTypingIndicator() {
+            loadingIndicator.classList.add('hidden');
+        }
+
+        function showInstructionMessage() {
+            if (hasUserInteracted) {
+                return; 
+            }
+            
+            if (chatMessages.querySelector('.user-choice-button')) {
+                instructionMessage.classList.add('show');
+            }
+        }
+
+        function hideInstructionMessage() {
+            instructionMessage.classList.remove('show');
+        }
+        
+        function followUpChoices(excludedId) {
+            const remainingChoices = ALL_CHOICES.filter(choice => choice.id !== excludedId);
+            
+            showTypingIndicator();
+            setTimeout(() => {
+                hideTypingIndicator();
+                addMessage("Ya da keşfetmeye devam et... ✨", 'bot');
+                
+                remainingChoices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.classList.add('user-choice-button');
+                    button.textContent = choice.text;
+
+                    button.addEventListener('click', () => {
+                        handleChoiceClick(choice);
+                    });
+                    chatMessages.appendChild(button);
+                });
+                
+                showInstructionMessage();
+                
+                restartButton.classList.remove('hidden');
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, TYPING_DELAY);
+        }
+        
+        function handleChoiceClick(choice) {
+            hasUserInteracted = true;
+            hideInstructionMessage(); 
+            
+            if (choice.event) {
+                trackEvent(choice.event);
+            } else {
+                trackEvent(choice.text.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase() + "_click");
+            }
+
+            addMessage(choice.text, 'user');
+
+            const currentChoiceButtons = chatMessages.querySelectorAll('.user-choice-button');
+            currentChoiceButtons.forEach(btn => btn.remove());
+            
+            restartButton.classList.add('hidden');
+
+            if (choice.action === 'image_link') {
+                
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    
+                    const link = document.createElement('a');
+                    link.href = choice.url;
+                    link.target = '_blank';
+                    link.classList.add('image-link-container'); 
+                    
+                    const img = document.createElement('img');
+                    img.src = choice.imageUrl;
+                    img.alt = choice.text + " stiline uygun külotlu çorap modeli";
+                    
+                    const afterImageLoaded = () => {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        showTypingIndicator();
+                        setTimeout(() => {
+                            hideTypingIndicator();
+                            addMessage("Ürünleri incelemek için sayfayı ziyaret et! 👇", 'bot');
+
+                            const inspectButton = document.createElement('button');
+                            inspectButton.classList.add('user-choice-button');
+                            inspectButton.textContent = "Ürünleri İncele!";
+                            inspectButton.style.backgroundColor = '#fa5273'; 
+                            inspectButton.style.color = '#ffffff';
+
+                            inspectButton.addEventListener('click', () => {
+                                trackEvent("product_inspect_click_" + choice.id); 
+                                window.open(choice.url, '_blank'); 
+                            });
+                            chatMessages.appendChild(inspectButton);
+                            
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            
+                            followUpChoices(choice.id); 
+                            
+                        }, TYPING_DELAY); 
+                    };
+
+
+                    img.onload = afterImageLoaded;
+                    img.onerror = () => {
+                         console.error("Görsel yüklenemedi:", choice.imageUrl);
+                         img.src = "https://placehold.co/200x150/fa5273/ffffff?text=Görsel+Yok";
+                         afterImageLoaded(); 
+                    };
+                    
+                    link.appendChild(img);
+                    chatMessages.appendChild(link);
+                    chatMessages.scrollTop = chatMessages.scrollHeight; 
+                    
+                }, TYPING_DELAY); 
+
+            }
+        }
+
+
+        function renderChoices() {
+            const currentNode = decisionTree[currentPath];
+            if (!currentNode || !currentNode.choices || currentNode.choices.length === 0) {
+                restartButton.classList.remove('hidden');
+                hideInstructionMessage(); 
+                return;
+            }
+
+            hideTypingIndicator();
+            restartButton.classList.add('hidden'); 
+
+            currentNode.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.classList.add('user-choice-button');
+                button.textContent = choice.text;
+
+                button.addEventListener('click', () => {
+                    handleChoiceClick(choice);
+                });
+                chatMessages.appendChild(button);
+            });
+            
+            showInstructionMessage(); 
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
+        }
+
+        function displayMessagesSequentially(messages, index) {
+            if (index >= messages.length) {
+                hideTypingIndicator();
+                setTimeout(renderChoices, TYPING_DELAY / 2); 
+                return;
+            }
+
+            const message = messages[index];
+            showTypingIndicator();
+
+            setTimeout(() => {
+                if (message.type === 'text') {
+                    addMessage(message.content, 'bot');
+                }
+
+                displayMessagesSequentially(messages, index + 1);
+            }, TYPING_DELAY);
+        }
+        
+        function renderStep() {
+            const currentNode = decisionTree[currentPath];
+            if (!currentNode) {
+                console.error("Karar ağacında geçersiz yol:", currentPath);
+                return;
+            }
+            
+            restartButton.classList.add('hidden'); 
+
+            displayMessagesSequentially(currentNode.messages, 0);
+        }
+
+        restartButton.addEventListener('click', () => {
+            trackEvent("restart_button_click"); 
+            chatMessages.innerHTML = ''; 
+            currentPath = 'start'; 
+            countdownMessageDiv = null; 
+            
+            hasUserInteracted = false; 
+            
+            renderStep(); 
+            restartButton.classList.add('hidden'); 
+        });
+
+        chatHeader.addEventListener('click', () => {
+            trackEvent("logo_click"); 
+            window.open(PENTI_MAIN_URL, '_blank'); 
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStep();
+        });
+    </script>
+</body>
+</html>
