@@ -3,608 +3,611 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>320x480 Ad with Card Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <meta name="ad.size" content="width=300, height=600">
+    <title>Penti Sohbet Kampanyası</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        var clickTag = "{CLICK_URL}https://ad.doubleclick.net/ddm/trackclk/N1343784.279382BIDMANAGER_DFASIT/B34443827.432111914;dc_trk_aid=625760322;dc_trk_cid=244052258;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ltd=;dc_tdv=1";
+        var eventUrl = "{EVENT_URL}";
+    </script>
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
             padding: 0;
-            background-color: #e9ecef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 480px;
-            width: 320px;
-            overflow: hidden;
         }
-
-        .ad-unit-wrapper {
-            width: 320px;
-            height: 480px;
-            display: flex;
-            flex-direction: column; 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            /* Placeholder background image - replace with actual URL if available */
-            background-image: url('https://nomad-digital.squarespace.com/s/TIB_PatiKart_bg2.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .ad-container {
-            width: 100%;
+        .chat-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
-            align-items: center;
-            font-size: 1.5rem;
-            color: #2c3e50; 
+            width: 300px;
+            height: 600px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chat-header {
+            background-color: #fa5273;
+            color: #ffffff;
+            padding: 1rem;
             text-align: center;
-            box-sizing: border-box;
-            position: relative;
-            height: 480px; 
-        }
-
-        .ad-container img {
-            max-width: 90%;
-            height: auto;
-            object-fit: contain;
-            margin: 0.25rem 0; 
-        }
-
-        .ad-container .logo {
-            max-height: 120px;
-            margin-top: 35px; 
-            margin-bottom: 5px;
-            position: absolute;
-            top: -10px; 
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 15; 
-            transition: max-height 0.3s ease, margin-top 0.3s ease, top 0.3s ease; 
-            cursor: pointer; 
-        }
-
-        .ad-container .logo.overlay-active {
-            max-height: 110px; 
-            margin-top: 0px; 
-            top: -5px; 
-        }
-
-        .game-wrapper {
-            width: 100%;
-            margin-top: 130px; 
-            height: 330px; 
-            box-sizing: border-box;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start; 
-            background-color: transparent;
-        }
-
-        .game-container {
-            background-color: transparent;
-            border-radius: 1rem;
-            text-align: center;
-            max-width: 300px;
-            width: 100%;
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
-            align-items: center;
+            gap: 0.5rem;
+            height: 70px;
+            cursor: pointer;
             position: relative;
             z-index: 1;
-            overflow: hidden;
         }
-
-        .game-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem; 
-            font-weight: 800; 
-            color: #ffffff; 
-            margin-top: 30px; 
-            margin-bottom: 20px;
-            background-color: transparent;
-            border-radius: 0.5rem;
-            padding: 0 10px; 
+        .chat-header img {
+            max-height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
         }
-
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 0.5rem;
-            width: 100%;
-            max-width: 280px;
-            height: auto;
-            margin: 0 auto;
-        }
-
-        .card {
-            width: 100%;
-            padding-bottom: 100%;
-            position: relative;
-            cursor: pointer;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            border: 3px solid transparent; 
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border 0.2s ease, background-color 0.3s ease;
-        }
-
-        .card:not(.flipped):not(.matched):hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card.error-flip {
-            background-color: rgba(44, 62, 80, 0.15); 
-            border: 3px solid #2c3e50;
-        }
-        .card.error-flip .card-inner {
-            border: none; 
-            box-sizing: border-box;
-        }
-        .card.error-flip .card-front {
-            background-color: transparent; 
-        }
-
-
-        .card-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s, border 0.1s ease;
-            border-radius: 0.5rem;
-        }
-
-        .card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backface-visibility: hidden;
-            border-radius: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .card-front {
-            background-color: #ecf0f1; 
-            color: #2c3e50;
-            transform: rotateY(180deg);
-            overflow: hidden;
-        }
-
-        .card-front img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 0.25rem;
-        }
-
-        .card-back {
-            background-color: #ff0c87; 
-            color: white;
-            font-weight: bold;
-            transform: rotateY(0deg);
-        }
-
-        .card-back::before {
-            content: '?';
-            font-size: 2rem;
-            color: white;
-            background-image: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
-            -webkit-text-fill-color: unset;
-        }
-        
-        .card.matched {
-            border: 3px solid #1132ff; 
-            background-color: rgba(17, 50, 255, 0.3); 
-        }
-
-        .card.matched .card-inner {
-            pointer-events: none;
-            box-sizing: border-box;
-        }
-
-        .card.matched .card-front {
-            background-color: transparent; 
-            color: #2c3e50;
-        }
-        
-        /* Eşleşme pop-up'ı kaldırıldı, ilgili CSS kuralları temizlendi. */
-
-
-        .message-overlay {
-            position: absolute;
-            width: 95%; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            bottom: 5px; 
-
-            height: 380px; 
-            
-            background-color: rgba(255, 255, 255, 0.95); 
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center; 
-            align-items: center;
-            
-            border-radius: 1rem; 
-
-            z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            
-            padding: 0; 
-            box-sizing: border-box;
+            gap: 0.3rem;
+            position: relative;
+        }
+        .message-bubble {
+            max-width: 225px;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.8rem;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        .bot-message {
+            background-color: #ffe4e6;
+            color: #fa5273;
+            align-self: flex-start;
+        }
+        .user-message {
+            background-color: #fce7f6;
+            color: #1e293b;
+            align-self: flex-end;
         }
 
-        .message-overlay.visible {
-            opacity: 1;
-            visibility: visible;
+        .image-link-container {
+            align-self: flex-start;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            width: 220px;
+            min-width: 200px;
+            max-width: 225px;
+            border-radius: 0.5rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: block;
+            border-radius: 0.5rem
         }
 
-        .message-image-container {
-            width: 95%; 
-            height: calc(100% - 70px); 
-            
-            margin: 10px 0 0 0; 
-            padding: 0; 
-            box-sizing: border-box;
-            
-            display: flex; 
+        .image-link-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .image-link-container img {
+             display: block;
+             width: 100%;
+             height: auto;
+             border-radius: 0.5rem
+        }
+
+        .user-choice-button {
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: none;
+            text-align: left;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+            align-self: flex-end;
+            width: fit-content;
+            max-width: 90%;
+            margin-bottom: 0.25rem;
+        }
+        
+        .initial-choice-button {
+             background-color: #fa5273;
+        }
+
+        .post-action-button {
+            min-width: 150px;
+        }
+        
+        .user-choice-button:hover {
+            background-color: #e04263;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 1.5px 3px -1px rgba(0, 0, 0, 0.07);
+        }
+        .user-choice-button:active {
+            background-color: #c93b5a;
+            transform: translateY(0);
+        }
+
+        .restart-button-container {
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; 
-            
-            border-radius: 0.75rem; 
-            cursor: pointer; 
-            
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .message-image-container:hover {
-            transform: scale(1.03); 
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
-            border-radius: 0.75rem; 
-        }
-        
-        .message-image-container img {
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            margin: 0; 
-            display: block; 
-            object-fit: contain; 
-            
-            border-radius: 0.75rem; 
-            
-            padding: 0;
-            box-sizing: border-box;
-            transition: none; 
-        }
-        
-        .message-image-container:hover img {
-            border-radius: 0.75rem;
+            height: 50px;
+            position: relative;
+            width: 298px;
+            background-color: #f8f8f8;
         }
 
-
-        .message-overlay h2, .message-overlay p {
-            display: none; 
-        }
-        
-        .overlay-buttons {
-            display: flex;
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            gap: 0.5rem; 
-            padding: 0.25rem 0 0.5rem 0; 
-            width: 90%; 
-            max-width: 250px; 
-            box-sizing: border-box;
-            z-index: 11; 
-        }
-
-        .discover-button {
-            background-color: #ff0c87; 
-            color: white;
-            box-shadow: 0 2px 5px rgba(255, 12, 135, 0.3); 
-            padding: 0.6rem 1.5rem;
+        .restart-button {
+            background-color: #fa5273;
+            color: #ffffff;
+            padding: 0.6rem 1rem;
+            border-radius: 0.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
             border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 700;
-            width: 150px; 
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 900; 
-            
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 0.85rem;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .restart-button:hover {
+            background-color: #e04263;
+        }
+        .restart-button:active {
+            background-color: #c93b5a;
+            transform: translateY(0);
         }
 
-        .discover-button:hover {
-            background-color: #e00b77; 
-            transform: translateY(-2px) scale(1.02); 
-            box-shadow: 0 4px 10px rgba(255, 12, 135, 0.5); 
-        }
-
-        .replay-icon {
-            width: 45px; 
-            height: 45px;
-            cursor: pointer;
-            
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            
-            filter: invert(19%) sepia(87%) saturate(5432%) hue-rotate(222deg) brightness(97%) contrast(100%);
-        }
-
-        .replay-icon:hover {
-            opacity: 1; 
-            transform: scale(1.15); 
-        }
-        
-        @keyframes pulse-and-click {
-            0% { transform: scale(1) translateY(0); opacity: 0.8; }
-            50% { transform: scale(1.15) translateY(-8px); opacity: 1; }
-            100% { transform: scale(1) translateY(0); opacity: 0.8; }
-        }
-
-        .click-hand {
-            position: absolute;
-            top: 160px; 
-            left: 100px; 
+        .loading-indicator {
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 5% ;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 65px; 
-            height: auto;
-            z-index: 5;
-            animation: pulse-and-click 1.5s ease-in-out infinite; 
-            pointer-events: none; 
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .loading-indicator span {
+            animation-name: blink;
+            animation-duration: 1.4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+            font-size: 3.5rem;
+            line-height: 1;
+            margin: 0 4px;
+        }
+
+        .loading-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-messages:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(100, 116, 139, 0.3);
+        }
+        .chat-messages::-webkit-scrollbar-thumb:active {
+            background-color: rgba(100, 116, 139, 0.5);
+        }
+
+        .chat-messages {
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+        }
+        .chat-messages:hover {
+            scrollbar-color: rgba(100, 116, 139, 0.3) transparent;
+        }
+
+        .instruction-message {
+            position: absolute;
+            bottom: 170px;
+            left: 130px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .instruction-message.show {
+            opacity: 1;
+        }
+
+        @keyframes cursor-movement-and-click {
+            0% {
+                transform: translate(0, 0) scale(1);
+                filter: brightness(100%);
+            }
+            40% {
+                transform: translate(25px, -25px) scale(1);
+                filter: brightness(100%);
+            }
+            45% {
+                transform: translate(25px, -25px) scale(1.1);
+                filter: brightness(200%);
+            }
+            50% {
+                transform: translate(25px, -25px) scale(1);
+                filter: brightness(100%);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+                filter: brightness(100%);
+            }
+        }
+
+        .cursor-indicator {
+            width: 60px;
+            height: 60px;
+            animation: cursor-movement-and-click 2.5s infinite ease-in-out;
+            transform-origin: bottom center;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
-    <div class="ad-unit-wrapper">
-        <div class="ad-container">
-            <img src="https://nomad-digital.squarespace.com/s/PatiKart_Logo.png" alt="" class="logo">
-        <div class="game-wrapper">
-            <div class="game-container">
-                <div class="game-header">
-                    <div id="game-title" class="text-center">Kartları Eşleştir, <br> Pati Kart Ayrıcalıklarıyla Tanış!</div>
-                </div>
-                
-                <img id="click-hand" class="click-hand hidden" 
-                     src="https://nomad-digital.squarespace.com/s/Robo-Danisman_Click-Hand.png" 
-                     alt="Clicking hand icon"
-                     onerror="this.src='https://placehold.co/65x65/1132ff/ffffff?text=👆'">
-                     
-                <div id="game-board" class="game-board">
-                    <!-- Kartlar burada JavaScript ile oluşturulur -->
-                </div>
-
+    <div class="chat-container">
+        <div class="chat-header" id="chatHeader">
+            <img src="https://nomad-digital.squarespace.com/s/Penti_Logo.svg" alt="Penti Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/fa5273/ffffff?text=Penti';" />
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div id="instructionMessage" class="instruction-message">
+                <img id="cursorImage" src="https://nomad-digital.squarespace.com/s/Robo-Danisman_Click-Hand.png" alt="Tıklama Eli" class="cursor-indicator" onerror="this.onerror=null;this.src='https://placehold.co/50x50/fa5273/ffffff?text=X';" />
             </div>
         </div>
-
-        <!-- Eşleşme pop-up'ı kaldırıldı -->
-        
-        <div id="message-overlay" class="message-overlay">
-            <div id="message-image-container" class="message-image-container">
-                <img src="https://nomad-digital.squarespace.com/s/Campaign_Message.png" 
-                     alt="Campaign Message Image"
-                     onerror="this.src='https://placehold.co/320x250/ff0c87/ffffff?text=Mesaj+Görseli+Yüklenemedi'">
+        <div class="restart-button-container">
+            <div id="loadingIndicator" class="loading-indicator hidden">
+                <span>.</span><span>.</span><span>.</span>
             </div>
-            <h2 id="overlay-title"></h2>
-            <p id="overlay-message"></p>
-            <div class="overlay-buttons">
-                <img id="replay-button" 
-                     class="replay-icon" 
-                     src="https://nomad-digital.squarespace.com/s/Banvit_Play-Again.png" 
-                     alt="Replay icon"
-                     onerror="this.src='https://placehold.co/45x45/1132ff/ffffff?text=🔁'">
-                
-                <button id="discover-button" class="discover-button">Keşfet!</button>
-            </div>
+            <button id="restartButton" class="restart-button hidden">Sohbeti Yeniden Başlat</button>
         </div>
-        
     </div>
 
-
     <script>
-        const DISCOVER_URL = 'https://www.maximum.com.tr/kampanyalar/veteriner-ya-da-petshop-alisverislerinize-yuzde10-indirim';
-
-        const cardImages = [
-            'https://nomad-digital.squarespace.com/s/Pati-Kart_Kopek.png', 
-            'https://nomad-digital.squarespace.com/s/Pati-Kart_Kedi.png', 
-            'https://nomad-digital.squarespace.com/s/Pati-Kart_Kus.png' 
+        const PENTI_MAIN_URL = clickTag;
+        const TYPING_DELAY = 1200;
+        
+        let hasUserInteracted = false;
+        
+        const ALL_CHOICES = [
+            {
+                text: "Cesur ve Fark Yaratan Desenler",
+                action: "image_link",
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Desen.jpg",
+                url: PENTI_MAIN_URL,
+                event: "bold_style_click",
+                id: "bold"
+            },
+            {
+                text: "Şık ve Klasik Dokunuşlar",
+                action: "image_link",
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Klasik.jpg",
+                url: PENTI_MAIN_URL,
+                event: "classic_style_click",
+                id: "classic"
+            },
+            {
+                text: "Canlı Renkler ve Eğlenceli Detaylar",
+                action: "image_link",
+                imageUrl: "https://nomad-digital.squarespace.com/s/Pentilicious-Renkli.jpg",
+                url: PENTI_MAIN_URL,
+                event: "fun_details_click",
+                id: "fun"
+            }
         ];
 
-        // Eşleşme mesajları kaldırıldı
-        
-        let cards = [];
-        let flippedCards = [];
-        let matchedPairs = 0;
-        let canFlip = true;
-        
-        // Pop-up değişkenleri kaldırıldı
-        const WIN_DELAY = 100; // Eşleşme sonrası bekleme süresi
-
-        const adContainer = document.querySelector('.ad-container'); 
-        const logoElement = document.querySelector('.logo'); 
-        const gameBoard = document.getElementById('game-board');
-        const messageOverlay = document.getElementById('message-overlay');
-        const replayIcon = document.getElementById('replay-button'); 
-        const discoverButton = document.getElementById('discover-button');
-        const clickHand = document.getElementById('click-hand'); 
-        const messageImageContainer = document.getElementById('message-image-container'); 
-        
-        // Pop-up element referansları kaldırıldı
-
-        function initGame() {
-            flippedCards = [];
-            matchedPairs = 0;
-            canFlip = true;
-            
-            gameBoard.innerHTML = '';
-
-            messageOverlay.classList.remove('visible');
-            
-            // Pop-up temizleme logic'i kaldırıldı
-            
-            logoElement.classList.remove('overlay-active');
-
-            cards = [...cardImages, ...cardImages]
-                .sort(() => Math.random() - 0.5)
-                .map((imageUrl, index) => ({
-                    id: index,
-                    imageUrl: imageUrl,
-                    isFlipped: false,
-                    isMatched: false
-                }));
-
-            cards.forEach(card => {
-                const cardElement = createCardElement(card);
-                gameBoard.appendChild(cardElement);
-            });
-
-            clickHand.classList.remove('hidden');
-        }
-
-        // showMatchPopup fonksiyonu kaldırıldı
-
-
-        function createCardElement(cardData) {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('card');
-            cardElement.dataset.id = cardData.id;
-
-            const cardInner = document.createElement('div');
-            cardInner.classList.add('card-inner');
-
-            const cardFront = document.createElement('div');
-            cardFront.classList.add('card-front');
-            const cardImage = document.createElement('img');
-            cardImage.src = cardData.imageUrl;
-            cardImage.alt = '';
-            cardImage.onerror = function() {
-                this.src = `https://placehold.co/60x60/cccccc/333333?text=Error`;
-                this.alt = 'Image Load Error';
-            };
-            cardFront.appendChild(cardImage);
-
-            const cardBack = document.createElement('div');
-            cardBack.classList.add('card-back');
-
-            cardInner.appendChild(cardFront);
-            cardInner.appendChild(cardBack);
-            cardElement.appendChild(cardInner);
-
-            cardElement.addEventListener('click', () => flipCard(cardElement));
-
-            return cardElement;
-        }
-        
-        function flipCard(clickedCardElement) {
-            if (clickedCardElement.classList.contains('flipped') && !clickedCardElement.classList.contains('matched') && flippedCards.length === 1 && flippedCards[0] === clickedCardElement) {
-                clickedCardElement.classList.remove('flipped');
-                flippedCards = [];
-                clickedCardElement.classList.remove('error-flip');
-                return;
+        const decisionTree = {
+            start: {
+                messages: [
+                    { type: 'text', content: "Külotlu çorapla tarzını en iyi nasıl ifade edersin?" }
+                ],
+                choices: ALL_CHOICES
             }
+        };
 
-            if (!canFlip || clickedCardElement.classList.contains('flipped') || clickedCardElement.classList.contains('matched')) {
-                return;
-            }
-            
-            if(flippedCards.length === 0) {
-                 clickHand.classList.add('hidden');
-            }
+        let currentPath = 'start';
+        const chatMessages = document.getElementById('chatMessages');
+        const restartButton = document.getElementById('restartButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const chatHeader = document.getElementById('chatHeader');
+        const instructionMessage = document.getElementById('instructionMessage');
+        const cursorImage = document.getElementById('cursorImage');
+        let countdownMessageDiv = null;
 
-            clickedCardElement.classList.add('flipped');
-            flippedCards.push(clickedCardElement);
-
-            if (flippedCards.length === 2) {
-                canFlip = false; 
-                checkForMatch();
-            }
-        }
-
-        function checkForMatch() {
-            const [card1, card2] = flippedCards;
-            const imageUrl1 = card1.querySelector('.card-front img').src;
-            const imageUrl2 = card2.querySelector('.card-front img').src;
-
-            if (imageUrl1 === imageUrl2) {
-                matchedPairs++;
-                
-                // Pop-up mesajı çağırma kaldırıldı
-
-                card1.classList.add('matched');
-                card2.classList.add('matched');
-
-                card1.classList.remove('error-flip');
-                card2.classList.remove('error-flip');
-
-                flippedCards = [];
-                canFlip = true; 
-
-                if (matchedPairs === cardImages.length) { 
-                    // Pop-up bekleme süresi kaldırıldı
-                    setTimeout(() => {
-                        showWinMessage();
-                    }, WIN_DELAY); 
-                }
+        function trackEvent(eventName) {
+            if (eventUrl && eventName) {
+                var track = new Image();
+                track.src = eventUrl + eventName;
+                console.log("Tracking event:", track.src);
             } else {
-                card1.classList.add('error-flip');
-                card2.classList.add('error-flip');
-
-                setTimeout(() => {
-                    card1.classList.remove('flipped');
-                    card2.classList.remove('flipped');
-                    card1.classList.remove('error-flip');
-                    card2.classList.remove('error-flip');
-                    flippedCards = []; 
-                    canFlip = true; 
-                }, 1000); 
+                console.warn("Etkinlik izleme URL'si veya etkinlik adı eksik.");
             }
         }
 
-        function showWinMessage() {
-            messageOverlay.classList.add('visible');
-            logoElement.classList.add('overlay-active');
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message-bubble');
+            if (sender === 'user') {
+                messageDiv.classList.add('user-message');
+            } else {
+                messageDiv.classList.add('bot-message');
+            }
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return messageDiv;
         }
 
-        function handleDiscoverClick() {
-            window.open(DISCOVER_URL, '_blank');
+        function showTypingIndicator() {
+            restartButton.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+        }
+
+        function hideTypingIndicator() {
+            loadingIndicator.classList.add('hidden');
+        }
+
+        function showInstructionMessage() {
+            if (hasUserInteracted) {
+                return;
+            }
+            
+            if (chatMessages.querySelector('.user-choice-button')) {
+                instructionMessage.classList.add('show');
+            }
+        }
+
+        function hideInstructionMessage() {
+            instructionMessage.classList.remove('show');
         }
         
-        replayIcon.addEventListener('click', initGame);
+        function displayNextChoices(excludedId) {
+            const currentChoiceButtons = chatMessages.querySelectorAll('.user-choice-button');
+            currentChoiceButtons.forEach(btn => btn.remove());
 
-        discoverButton.addEventListener('click', handleDiscoverClick);
-        
-        messageImageContainer.addEventListener('click', handleDiscoverClick);
-        
-        logoElement.addEventListener('click', handleDiscoverClick);
+            const remainingChoices = ALL_CHOICES.filter(choice => choice.id !== excludedId);
+            
+            showTypingIndicator();
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                addMessage("Ürünleri keşfetmeye devam et... ✨", 'bot'); 
+                
+                remainingChoices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.classList.add('user-choice-button', 'initial-choice-button');
+                    button.textContent = choice.text;
 
-        window.onload = initGame;
+                    button.addEventListener('click', () => {
+                        handleChoiceClick(choice);
+                    });
+                    chatMessages.appendChild(button);
+                });
+                
+                showInstructionMessage();
+                
+                restartButton.classList.remove('hidden');
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, TYPING_DELAY);
+        }
+        
+        function handleChoiceClick(choice) {
+            hasUserInteracted = true;
+            hideInstructionMessage();
+            
+            if (choice.event) {
+                trackEvent(choice.event);
+            } else {
+                trackEvent(choice.text.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase() + "_click");
+            }
+
+            addMessage(choice.text, 'user');
+
+            const currentChoiceButtons = chatMessages.querySelectorAll('.user-choice-button');
+            currentChoiceButtons.forEach(btn => btn.remove());
+            
+            restartButton.classList.add('hidden');
+
+            if (choice.action === 'image_link') {
+                
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    
+                    const link = document.createElement('a');
+                    link.href = choice.url;
+                    link.target = '_blank';
+                    link.classList.add('image-link-container');
+                    
+                    const img = document.createElement('img');
+                    img.src = choice.imageUrl;
+                    img.alt = choice.text + " stiline uygun külotlu çorap modeli";
+                    
+                    const afterImageLoaded = () => {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        showTypingIndicator();
+                        setTimeout(() => {
+                            hideTypingIndicator();
+                            addMessage("Harika bir seçim! 🌸✨ Ürünleri incelemek için sayfayı ziyaret et 👇🏼", 'bot');
+
+                            const inspectButton = document.createElement('button');
+                            inspectButton.classList.add('user-choice-button', 'initial-choice-button', 'post-action-button'); 
+                            inspectButton.textContent = "Ürünleri İncele!";
+
+                            inspectButton.addEventListener('click', () => {
+                                trackEvent("product_inspect_click_" + choice.id);
+                                window.open(choice.url, '_blank');
+                            });
+                            chatMessages.appendChild(inspectButton);
+                            
+                            const continueButton = document.createElement('button');
+                            continueButton.classList.add('user-choice-button', 'initial-choice-button', 'post-action-button');
+                            continueButton.textContent = "Keşfetmeye Devam Et...";
+                            
+                            continueButton.addEventListener('click', () => {
+                                trackEvent("continue_exploring_click_" + choice.id);
+                                
+                                inspectButton.remove();
+                                continueButton.remove();
+                                
+                                displayNextChoices(choice.id); 
+                            });
+                            chatMessages.appendChild(continueButton);
+
+                            restartButton.classList.remove('hidden');
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            
+                        }, TYPING_DELAY);
+                    };
+
+
+                    img.onload = afterImageLoaded;
+                    img.onerror = () => {
+                         console.error("Görsel yüklenemedi:", choice.imageUrl);
+                         img.src = "https://placehold.co/200x150/fa5273/ffffff?text=Görsel+Yok";
+                         afterImageLoaded();
+                    };
+                    
+                    link.appendChild(img);
+                    chatMessages.appendChild(link);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                }, TYPING_DELAY);
+
+            }
+        }
+
+
+        function renderChoices() {
+            const currentNode = decisionTree[currentPath];
+            if (!currentNode || !currentNode.choices || currentNode.choices.length === 0) {
+                restartButton.classList.remove('hidden');
+                hideInstructionMessage();
+                return;
+            }
+
+            hideTypingIndicator();
+            restartButton.classList.add('hidden');
+
+            currentNode.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.classList.add('user-choice-button', 'initial-choice-button');
+                button.textContent = choice.text;
+
+                button.addEventListener('click', () => {
+                    handleChoiceClick(choice);
+                });
+                chatMessages.appendChild(button);
+            });
+            
+            showInstructionMessage();
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function displayMessagesSequentially(messages, index) {
+            if (index >= messages.length) {
+                hideTypingIndicator();
+                setTimeout(renderChoices, TYPING_DELAY / 2);
+                return;
+            }
+
+            const message = messages[index];
+            showTypingIndicator();
+
+            setTimeout(() => {
+                if (message.type === 'text') {
+                    addMessage(message.content, 'bot');
+                }
+
+                displayMessagesSequentially(messages, index + 1);
+            }, TYPING_DELAY);
+        }
+        
+        function renderStep() {
+            const currentNode = decisionTree[currentPath];
+            if (!currentNode) {
+                console.error("Karar ağacında geçersiz yol:", currentPath);
+                return;
+            }
+            
+            restartButton.classList.add('hidden');
+
+            displayMessagesSequentially(currentNode.messages, 0);
+        }
+
+        restartButton.addEventListener('click', () => {
+            trackEvent("restart_button_click");
+            chatMessages.innerHTML = '';
+            currentPath = 'start';
+            countdownMessageDiv = null;
+            
+            hasUserInteracted = false;
+            
+            renderStep();
+            restartButton.classList.add('hidden');
+        });
+
+        chatHeader.addEventListener('click', () => {
+            trackEvent("logo_click");
+            window.open(PENTI_MAIN_URL, '_blank');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStep();
+        });
     </script>
 </body>
 </html>
-
